@@ -6,7 +6,9 @@ import ImageViewer from "@/components/ImageViewer";
 import Button from "@/components/Button";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
-
+import EmojiPicker from "@/components/EmojiPicker";
+import EmojiList from '@/components/EmojiList';
+import EmojiSticker from "@/components/EmojiSticker";
 
 
 const PlaceholderImage = require('@/assets/images/background-image.png')
@@ -14,6 +16,8 @@ const PlaceholderImage = require('@/assets/images/background-image.png')
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | undefined >(undefined);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [pickedEmoji, setPickedEmoji] = useState<string | undefined>(undefined);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -33,17 +37,20 @@ export default function Index() {
   };
 
   const onAddSticker = () => {
-    // TODO: implement this later
+    setIsModalVisible(true);
   };
-
+  const onModalClose = async () => {
+    setIsModalVisible(false);
+  };
   const onSaveImageAsync = async () => {
-    // TODO: implement this later
+    // we will implement this later
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+        {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
       </View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
@@ -59,6 +66,9 @@ export default function Index() {
         <Button label="Use this photo" onPress={() => setShowAppOptions(true)}/>
       </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+      </EmojiPicker>
     </View>
   );
 }
