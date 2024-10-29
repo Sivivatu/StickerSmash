@@ -14,10 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.test.app"
+      "bundleIdentifier": "com.stickersmash.app"
     },
     "android": {
-      "package": "com.test.app",
+      "package": "com.stickersmash.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
