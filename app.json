@@ -13,7 +13,8 @@
       "backgroundColor": "#25292e"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.test.app"
     },
     "android": {
       "package": "com.test.app",
@@ -32,6 +33,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cd898577-f412-415a-8bb2-e3a27a9ee6ec"
+      }
     }
   }
 }
