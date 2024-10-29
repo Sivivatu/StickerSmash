@@ -1,4 +1,4 @@
-import { View, StyleSheet, Platform } from "react-native";
+import { View, StyleSheet, Platform, ImageSourcePropType } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { useState, useRef } from "react";
 import { captureRef } from 'react-native-view-shot';
@@ -24,6 +24,14 @@ export default function Index() {
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<string | undefined>(undefined);
+
+  const getImageSource = (path: string): ImageSourcePropType => {
+    if (path.startsWith('http') || path.startsWith('https')) {
+      return { uri: path };
+    } else {
+      return require(`../assets/images/${path}`);
+    }
+  };
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -91,7 +99,7 @@ export default function Index() {
       <View style={styles.container}>
         <View ref={imageRef} collapsable={false} style={styles.imageContainer}>
           <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
-          {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
+          {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={getImageSource(pickedEmoji)} />}
         </View>
         {showAppOptions ? (
           <View style={styles.optionsContainer}>
