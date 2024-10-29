@@ -1,10 +1,11 @@
-import {  View } from 'react-native';
+import {  ImageSourcePropType, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { Image } from 'react-native-reanimated/lib/typescript/Animated';
 
 type Props = {
   imageSize: number;
-  stickerSource: string;
+  stickerSource: ImageSourcePropType;
 };
 
 export default function EmojiSticker({ imageSize, stickerSource }: Props) {
